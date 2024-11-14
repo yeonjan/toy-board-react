@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Category } from '../models/category.ts';
+import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const SideBar: React.FC = () => {
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories(prev => (prev.includes(categoryId) ? prev.filter(id => id !== categoryId) : [...prev, categoryId]));
+  };
   const categories: Category[] = [
     {
       id: '1',
@@ -45,16 +50,36 @@ const SideBar: React.FC = () => {
       ],
     },
   ];
+
   return (
     /* Sidebar */
     <div className="w-64 p-4 border-r border-gray-700">
       <div className="mb-8">
-        <h2 className="text-lg font-semibold mb-4">Categories</h2>
-        {categories.map(category => (
-          <div key={category.id} className="py-2 px-4 hover:bg-gray-800 rounded cursor-pointer">
-            {category.name}
-          </div>
-        ))}
+        <h2 className="text-lg font-semibold mb-4 px-4">Categories</h2>
+        <div className="space-y-1">
+          {categories.map(category => (
+            <div key={category.id}>
+              <div
+                className="flex items-center justify-between py-2 px-4 rounded cursor-pointer hover:bg-gray-800"
+                onClick={() => category.subCategories && toggleCategory(category.id)}
+              >
+                <span>{category.name}</span>
+                {category.subCategories &&
+                  (expandedCategories.includes(category.id) ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />)}
+              </div>
+              {/* Subcategories */}
+              {category.subCategories && expandedCategories.includes(category.id) && (
+                <div className="ml-4 mt-1 space-y-1">
+                  {category.subCategories.map(subCategory => (
+                    <div key={subCategory.id} className="py-1.5 px-4 rounded cursor-pointer text-sm text-gray-300 hover:bg-gray-800">
+                      {subCategory.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
