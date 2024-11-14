@@ -2,7 +2,7 @@ import { Tag } from './tag.ts';
 import { Category } from './category.ts';
 
 export interface Post {
-  id: number;
+  id: string;
   title: string;
   memo?: string;
   url: string;

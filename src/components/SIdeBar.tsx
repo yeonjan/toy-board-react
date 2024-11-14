@@ -3,15 +3,47 @@ import { Category } from '../models/category.ts';
 
 const SideBar: React.FC = () => {
   const categories: Category[] = [
-    { id: 1, name: '관심 카테고리' },
-    { id: 2, name: '웹 개발' },
-    { id: 3, name: 'Java' },
-    { id: 4, name: 'Infra Structure' },
-    { id: 5, name: 'Database' },
-    { id: 6, name: 'Git' },
-    { id: 7, name: '일반 스터디' },
-    { id: 8, name: '투자' },
-    { id: 9, name: '프로덕트 소식' },
+    {
+      id: '1',
+      name: '웹 개발',
+      subCategories: [
+        { id: '6', name: 'React' },
+        { id: '7', name: 'Vue' },
+        { id: '8', name: 'Angular' },
+      ],
+    },
+    {
+      id: '2',
+      name: 'Java',
+      subCategories: [
+        { id: '9', name: 'Spring' },
+        { id: '10', name: 'JPA' },
+      ],
+    },
+    {
+      id: '3',
+      name: 'Infra Structure',
+      subCategories: [
+        { id: '11', name: 'Docker' },
+        { id: '12', name: 'Kubernetes' },
+      ],
+    },
+    {
+      id: '4',
+      name: 'Database',
+      subCategories: [
+        { id: '13', name: 'MySQL' },
+        { id: '14', name: 'MongoDB' },
+      ],
+    },
+    {
+      id: '5',
+      name: 'Git',
+      subCategories: [
+        { id: '15', name: '기본 명령어' },
+        { id: '16', name: '브랜치 전략' },
+      ],
+    },
   ];
   return (
     /* Sidebar */
